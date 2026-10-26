@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; display: flex; justify-content: center; padding-top: 80px; }
+        .box { background: #fff; padding: 30px 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.15); width: 320px; }
+        h2 { margin-top: 0; text-align: center; }
+        label { display: block; margin-top: 12px; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; margin-top: 4px; }
+        button { width: 100%; margin-top: 18px; padding: 10px; background: #2e7d32; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 15px; }
+        button:hover { background: #1b5e20; }
+        .error { color: red; margin-top: 12px; }
+        .success { color: green; margin-top: 12px; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Connexion</h2>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label>Utilisateur :</label>
+            <input type="text" name="username" autofocus/>
+        </div>
+        <div>
+            <label>Mot de passe :</label>
+            <input type="password" name="password"/>
+        </div>
+        <button type="submit">Se connecter</button>
+
+        <div th:if="${param.error}">
+            <p class="error">Nom d'utilisateur ou mot de passe incorrect.</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p class="success">Déconnecté avec succès.</p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

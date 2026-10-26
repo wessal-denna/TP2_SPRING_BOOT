@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 40px; }
+        .box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.15); max-width: 700px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #6a1b9a; color: #fff; }
+        .btn { display: inline-block; padding: 9px 16px; margin: 4px 6px 4px 0; background: #546e7a; color: #fff; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Page ADMIN : accès réservé !</h2>
+    <p>Connecté en tant que <b sec:authentication="name">admin</b></p>
+
+    <h3>Utilisateurs enregistrés</h3>
+    <table>
+        <thead>
+        <tr><th>Identifiant</th><th>Actif</th><th>Rôles</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.username}">username</td>
+            <td th:text="${u.enabled} ? 'Oui' : 'Non'">Oui</td>
+            <td>
+                <span th:each="r : ${u.roles}" th:text="${r.name} + ' '">ROLE</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn" th:href="@{/home}">Retour à l'accueil</a>
+    <a class="btn" th:href="@{/medicaments/liste}">Médicaments</a>
+    <a class="btn" th:href="@{/logout}">Se déconnecter</a>
+</div>
+</body>
+</html>
